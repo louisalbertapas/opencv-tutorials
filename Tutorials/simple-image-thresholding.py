@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 # thresholding is an image segmentation technique
 # divides into two. pixel lower than the threshold, and higher than the threshold
-img = cv.imread('gradient.png')
+img = cv.imread('../gradient.png')
 
 ret, th1 = cv.threshold(img, 50, 255, cv.THRESH_BINARY)
 ret, th2 = cv.threshold(img, 200, 255, cv.THRESH_BINARY_INV)

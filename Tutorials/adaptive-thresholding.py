@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-img = cv.imread('sudoku.png', 0)
+img = cv.imread('../sudoku.png', 0)
 ret, th1 = cv.threshold(img, 127, 255, cv.THRESH_BINARY)
 
 # the threshold value is

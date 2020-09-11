@@ -37,11 +37,17 @@ while cap.isOpened():
         dst = cv2.calcBackProject([hsv], channels=[0], hist=roi_hist, ranges=[0, 180], scale=1)
 
         # mean shift
-        ret, track = cv2.meanShift(dst, window=track, criteria=term_criteria)
+        # ret, track = cv2.meanShift(dst, window=track, criteria=term_criteria)
+
+        # camshift
+        ret, track = cv2.CamShift(dst, window=track, criteria=term_criteria)
 
         # draw it on image
-        x, y, w, h = track
-        frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 4)
+        pts = cv2.boxPoints(ret)
+        pts = np.int0(pts)  # convert to integer
+        frame = cv2.polylines(frame, [pts], isClosed=True, color=(0, 255, 0), thickness=3)
+        # x, y, w, h = track
+        # frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 4)
         cv2.imshow('dst', dst)
         cv2.imshow('frame', frame)
         if cv2.waitKey(1) == 27:
